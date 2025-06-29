@@ -47,9 +47,30 @@ kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePo
 ACCESS METHOD:
 
 1. Create monitoringurls.sh
+2. Make it exectable
+    chmod 700 monitoringurls.sh
+3. Login to the prometheus using the site we got, after we executed the file
+4. Login to graghana using the credentails below by passing the command
+   kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode && echo
+5. Username is admin
+6. Yes we did it!!!!!
 
-#!/bin/bash
+We can add prometheus as data source to graphana, as graphana is the pictorial representation of premotheus data
+   
+Configure Prometheus Data Source
 
+Login to Grafana
+Go to Configuration → Data Sources
+Add Prometheus data source
+URL: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+Save & Test
 
+Import Dashboards
+Popular Dashboard IDs to import:
+
+3662 - Prometheus 2.0 Overview
+1860 - Node Exporter Full
+6417 - Kubernetes Cluster Monitoring
+8588 - Kubernetes Deployment Statefulset Daemonset metrics
 
 
