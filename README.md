@@ -11,38 +11,38 @@ Helm installed
 
 1. Start Minikube
 
-minikube start --driver=docker
+   minikube start --driver=docker
 
 2. Enable Minikube Addons
    
-bashminikube addons enable metrics-server
+   bashminikube addons enable metrics-server
 
-4. Install Helm (if not already installed)
+3. Install Helm (if not already installed)
    
-bashcurl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+   bashcurl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-6. Add Prometheus Helm Repository
+4. Add Prometheus Helm Repository
    
-bashhelm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   bashhelm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
-helm repo update
+   helm repo update
 
-8. Install Prometheus Stack
+5. Install Prometheus Stack
    
-bashkubectl create namespace monitoring
+   bashkubectl create namespace monitoring
 
-helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
+   helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
 
-10. Verify Installation
+6. Verify Installation
     
-bashkubectl get pods -n monitoring
-kubectl get svc -n monitoring
+   bashkubectl get pods -n monitoring
+   kubectl get svc -n monitoring
 
-11. Configure NodePort for Permanent Access
-Set Prometheus NodePort
-kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
-Set Grafana NodePort
-kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
+7. Configure NodePort for Permanent Access
+      Set Prometheus NodePort
+         kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
+      Set Grafana NodePort
+         kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
 
 ACCESS METHOD:
 
