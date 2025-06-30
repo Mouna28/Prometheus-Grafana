@@ -40,20 +40,24 @@ Helm installed
 
 7. Configure NodePort for Permanent Access
       Set Prometheus NodePort
-         kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
+         
+   kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
+   
       Set Grafana NodePort
-         kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
+   
+   kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
 
 ACCESS METHOD:
 
 1. Create monitoringurls.sh
 2. Make it exectable
     chmod 700 monitoringurls.sh
-3. Login to the prometheus using the site we got, after we executed the file
-4. Login to graghana using the credentails below by passing the command
+3. Now execute the sheel script (./monitoringurls.sh)
+4. Login to the prometheus using the site we got, after we executed the file
+5. Login to graghana using the credentails below by passing the command
    kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode && echo
-5. Username is admin
-6. Yes we did it!!!!!
+6. Username is admin
+7. Yes we did it!!!!!
 
 We can add prometheus as data source to graphana, as graphana is the pictorial representation of premotheus data
    
